@@ -20,9 +20,12 @@
             // Obtém a mensagem do formulário
             var message = document.getElementById("message").value;
 
-            // Envia a mensagem para o arquivo PHP (ou outro servidor) para manipulação posterior
-            fetch("salvar_mensagem.php", {
+            // Envia a mensagem para o servidor na Vercel para manipulação posterior
+            fetch("https://testesho.vercel.app/salvar-mensagem", {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({ message: message })
             }).then(response => {
                 if (response.ok) {
