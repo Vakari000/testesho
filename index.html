@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvar Mensagem</title>
+</head>
+<body>
+    <h1>Salvar Mensagem</h1>
+    <form id="messageForm">
+        <label for="message">Digite sua mensagem:</label><br>
+        <input type="text" id="message" name="message"><br>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <script>
+        document.getElementById("messageForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio do formulário padrão
+            
+            // Obtém a mensagem do formulário
+            var message = document.getElementById("message").value;
+
+            // Envia a mensagem para o arquivo PHP (ou outro servidor) para manipulação posterior
+            fetch("salvar_mensagem.php", {
+                method: "POST",
+                body: JSON.stringify({ message: message })
+            }).then(response => {
+                if (response.ok) {
+                    alert("Mensagem salva com sucesso!");
+                } else {
+                    alert("Erro ao salvar mensagem.");
+                }
+            }).catch(error => {
+                console.error("Erro:", error);
+            });
+        });
+    </script>
+</body>
+</html>
